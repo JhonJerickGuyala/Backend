@@ -2,7 +2,10 @@ import express from "express";
 import 'dotenv/config.js'
 import bookRoutes from "./routers/BookRoutes.js";
 import studentRoutes from "./routers/StudentRoutes.js";
+import UserRoute from "./routers/UserRoutes.js";
 import cors from "cors";
+import UserRoutes from "./routers/UserRoutes.js";
+import authHandler from "./middleware/authHandler.js";
 
 const app = express();
 console.log(process.env.ORIGIN)
@@ -33,8 +36,11 @@ try {
     console.log(e);
 }
 
+app.use(authHandler);
 app.use('/book', bookRoutes);
 app.use('/student', studentRoutes);
+app.use('/user', UserRoutes)
+
 
 
 
